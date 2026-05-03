@@ -1,0 +1,6 @@
+{
+  "Name": "ATLAS.Compliance.Logging",
+  "ProjectType": "Library",
+  "Description": "Reusable UiPath workflows for federal-grade audit logging, PII redaction, tamper-evident hashing, retention stamping, and ATO evidence packaging. Aligned with NIST 800-53 Rev.",
+  "MainFile": "NewActivity.xaml"
+}

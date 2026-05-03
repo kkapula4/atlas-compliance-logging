@@ -1,0 +1,10 @@
+.local/ 
+.objects/ 
+.settings/ 
+.tmh/ 
+*.local 
+*.tmh 
+*.suo 
+~$* 
+.vs/ 
+*.nupkg 
