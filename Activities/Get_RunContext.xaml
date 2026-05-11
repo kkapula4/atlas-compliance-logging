@@ -1,4 +1,4 @@
-<Activity x:Class="Get_RunContext" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Get_RunContext" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="out_RunContext" Type="OutArgument(scg:Dictionary(x:String, x:Object))" />
   </x:Members>
@@ -71,6 +71,7 @@
       <AssemblyReference>System.Collections</AssemblyReference>
       <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
       <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap:WorkflowViewStateService.ViewState>
@@ -78,7 +79,7 @@
       <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="Get_RunContext" sap:VirtualizedContainerService.HintSize="496,533.6566666666666" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Get_RunContext" sap:VirtualizedContainerService.HintSize="673.3333333333333,1426.6666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="runContext">
         <Variable.Default>
@@ -91,99 +92,99 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign DisplayName="[1] MachineName" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign DisplayName="[1] MachineName" sap:VirtualizedContainerService.HintSize="450,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Object">
-          <CSharpReference x:TypeArguments="x:Object">runContext["MachineName"]</CSharpReference>
+          <CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_1">runContext["MachineName"]</CSharpReference>
         </OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:Object">
-          <CSharpValue x:TypeArguments="x:Object">Environment.MachineName</CSharpValue>
+          <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_2">Environment.MachineName</CSharpValue>
         </InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="[2] UserName" sap2010:WorkflowViewState.IdRef="Assign_2">
+    <Assign DisplayName="[2] UserName" sap:VirtualizedContainerService.HintSize="450,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_2">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Object">
-          <CSharpReference x:TypeArguments="x:Object">runContext["UserName"]</CSharpReference>
+          <CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_2">runContext["UserName"]</CSharpReference>
         </OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:Object">
-          <CSharpValue x:TypeArguments="x:Object">Environment.UserName</CSharpValue>
+          <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_3">Environment.UserName</CSharpValue>
         </InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="[3] RobotName" sap2010:WorkflowViewState.IdRef="Assign_3">
+    <Assign DisplayName="[3] RobotName" sap:VirtualizedContainerService.HintSize="450,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_3">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Object">
-          <CSharpReference x:TypeArguments="x:Object">runContext["RobotName"]</CSharpReference>
+          <CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_3">runContext["RobotName"]</CSharpReference>
         </OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:Object">
-          <CSharpValue x:TypeArguments="x:Object">string.IsNullOrEmpty(Environment.GetEnvironmentVariable("RobotName")) ? "unknown" : Environment.GetEnvironmentVariable("RobotName")</CSharpValue>
+          <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_4">string.IsNullOrEmpty(Environment.GetEnvironmentVariable("RobotName")) ? "unknown" : Environment.GetEnvironmentVariable("RobotName")</CSharpValue>
         </InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="[4] ProcessName" sap2010:WorkflowViewState.IdRef="Assign_4">
+    <Assign DisplayName="[4] ProcessName" sap:VirtualizedContainerService.HintSize="450,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_4">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Object">
-          <CSharpReference x:TypeArguments="x:Object">runContext["ProcessName"]</CSharpReference>
+          <CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_4">runContext["ProcessName"]</CSharpReference>
         </OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:Object">
-          <CSharpValue x:TypeArguments="x:Object">string.IsNullOrEmpty(Environment.GetEnvironmentVariable("UIPATH_PROCESS_NAME")) ? "unspecified" : Environment.GetEnvironmentVariable("UIPATH_PROCESS_NAME")</CSharpValue>
+          <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_5">string.IsNullOrEmpty(Environment.GetEnvironmentVariable("UIPATH_PROCESS_NAME")) ? "unspecified" : Environment.GetEnvironmentVariable("UIPATH_PROCESS_NAME")</CSharpValue>
         </InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="[5] ProcessVersion" sap2010:WorkflowViewState.IdRef="Assign_5">
+    <Assign DisplayName="[5] ProcessVersion" sap:VirtualizedContainerService.HintSize="450,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_5">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Object">
-          <CSharpReference x:TypeArguments="x:Object">runContext["ProcessVersion"]</CSharpReference>
+          <CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_5">runContext["ProcessVersion"]</CSharpReference>
         </OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:Object">
-          <CSharpValue x:TypeArguments="x:Object">string.IsNullOrEmpty(Environment.GetEnvironmentVariable("UIPATH_PROCESS_VERSION")) ? "unspecified" : Environment.GetEnvironmentVariable("UIPATH_PROCESS_VERSION")</CSharpValue>
+          <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_6">string.IsNullOrEmpty(Environment.GetEnvironmentVariable("UIPATH_PROCESS_VERSION")) ? "unspecified" : Environment.GetEnvironmentVariable("UIPATH_PROCESS_VERSION")</CSharpValue>
         </InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="[6] JobId" sap2010:WorkflowViewState.IdRef="Assign_6">
+    <Assign DisplayName="[6] JobId" sap:VirtualizedContainerService.HintSize="450,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_6">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Object">
-          <CSharpReference x:TypeArguments="x:Object">runContext["JobId"]</CSharpReference>
+          <CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_6">runContext["JobId"]</CSharpReference>
         </OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:Object">
-          <CSharpValue x:TypeArguments="x:Object">string.IsNullOrEmpty(Environment.GetEnvironmentVariable("UIPATH_JOB_ID")) ? Guid.NewGuid().ToString() : Environment.GetEnvironmentVariable("UIPATH_JOB_ID")</CSharpValue>
+          <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_7">string.IsNullOrEmpty(Environment.GetEnvironmentVariable("UIPATH_JOB_ID")) ? Guid.NewGuid().ToString() : Environment.GetEnvironmentVariable("UIPATH_JOB_ID")</CSharpValue>
         </InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="[7] Timestamp" sap2010:WorkflowViewState.IdRef="Assign_7">
+    <Assign DisplayName="[7] Timestamp" sap:VirtualizedContainerService.HintSize="450,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_7">
       <Assign.To>
         <OutArgument x:TypeArguments="x:Object">
-          <CSharpReference x:TypeArguments="x:Object">runContext["Timestamp"]</CSharpReference>
+          <CSharpReference x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpReference`1_7">runContext["Timestamp"]</CSharpReference>
         </OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:Object">
-          <CSharpValue x:TypeArguments="x:Object">DateTime.UtcNow.ToString("o")</CSharpValue>
+          <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_8">DateTime.UtcNow.ToString("o")</CSharpValue>
         </InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="[8] out_RunContext = runContext" sap2010:WorkflowViewState.IdRef="Assign_8">
+    <Assign DisplayName="[8] out_RunContext = runContext" sap:VirtualizedContainerService.HintSize="450,167.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_8">
       <Assign.To>
         <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">
-          <CSharpReference x:TypeArguments="scg:Dictionary(x:String, x:Object)">out_RunContext</CSharpReference>
+          <CSharpReference x:TypeArguments="scg:Dictionary(x:String, x:Object)" sap2010:WorkflowViewState.IdRef="CSharpReference`1_8">out_RunContext</CSharpReference>
         </OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)">
-          <CSharpValue x:TypeArguments="scg:Dictionary(x:String, x:Object)">runContext</CSharpValue>
+          <CSharpValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_9">runContext</CSharpValue>
         </InArgument>
       </Assign.Value>
     </Assign>
