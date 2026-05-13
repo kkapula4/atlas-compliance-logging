@@ -1,0 +1,174 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Redact_PII_Text" this:Redact_PII_Text.in_RedactEmails="True" this:Redact_PII_Text.in_RedactPhones="True" this:Redact_PII_Text.in_RedactSSN="True" this:Redact_PII_Text.in_RedactAccountNumbers="True" this:Redact_PII_Text.in_Replacement="%[REDACTED]" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_InputText" Type="InArgument(x:String)" />
+    <x:Property Name="in_RedactEmails" Type="InArgument(x:Boolean)" />
+    <x:Property Name="in_RedactPhones" Type="InArgument(x:Boolean)" />
+    <x:Property Name="in_RedactSSN" Type="InArgument(x:Boolean)" />
+    <x:Property Name="in_RedactAccountNumbers" Type="InArgument(x:Boolean)" />
+    <x:Property Name="in_Replacement" Type="InArgument(x:String)" />
+    <x:Property Name="out_RedactedText" Type="OutArgument(x:String)" />
+    <x:Property Name="out_RedactionCount" Type="OutArgument(x:Int32)" />
+    <x:Property Name="out_DetectedTypes" Type="OutArgument(s:String[])" />
+  </x:Members>
+  <sap2010:ExpressionActivityEditor.ExpressionActivityEditor>C#</sap2010:ExpressionActivityEditor.ExpressionActivityEditor>
+  <sap2010:WorkflowViewState.IdRef>ActivityBuilder_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Text</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Numerics</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.CSharp</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Redact_PII_Text" sap:VirtualizedContainerService.HintSize="675.3333333333333,740.6666666666666" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="workingText">
+        <Variable.Default>
+          <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_1">""</CSharpValue>
+        </Variable.Default>
+      </Variable>
+      <Variable x:TypeArguments="x:Int32" Name="redactionCount">
+        <Variable.Default>
+          <CSharpValue x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpValue`1_2">0</CSharpValue>
+        </Variable.Default>
+      </Variable>
+      <Variable x:TypeArguments="scg:List(x:String)" Name="detectedTypes">
+        <Variable.Default>
+          <CSharpValue x:TypeArguments="scg:List(x:String)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_3">new List&lt;string&gt;()</CSharpValue>
+        </Variable.Default>
+      </Variable>
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:InvokeCode ContinueOnError="{x:Null}" Code="workingText = string.IsNullOrEmpty(inputText) ? &quot;&quot; : inputText;&#xD;&#xA;redactionCount = 0;&#xD;&#xA;detectedTypes.Clear();&#xD;&#xA;&#xD;&#xA;if (redactSSN &amp;&amp; !string.IsNullOrEmpty(workingText))&#xD;&#xA;{&#xD;&#xA;    var pattern = @&quot;\b\d{3}-\d{2}-\d{4}\b&quot;;&#xD;&#xA;    var matches = System.Text.RegularExpressions.Regex.Matches(workingText, pattern);&#xD;&#xA;    if (matches.Count &gt; 0)&#xD;&#xA;    {&#xD;&#xA;        workingText = System.Text.RegularExpressions.Regex.Replace(workingText, pattern, replacement);&#xD;&#xA;        redactionCount += matches.Count;&#xD;&#xA;        detectedTypes.Add(&quot;ssn&quot;);&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;if (redactAccount &amp;&amp; !string.IsNullOrEmpty(workingText))&#xD;&#xA;{&#xD;&#xA;    var pattern = @&quot;\b(?:\d[ -]*?){13,19}\b&quot;;&#xD;&#xA;    var matches = System.Text.RegularExpressions.Regex.Matches(workingText, pattern);&#xD;&#xA;    if (matches.Count &gt; 0)&#xD;&#xA;    {&#xD;&#xA;        workingText = System.Text.RegularExpressions.Regex.Replace(workingText, pattern, replacement);&#xD;&#xA;        redactionCount += matches.Count;&#xD;&#xA;        detectedTypes.Add(&quot;account&quot;);&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;if (redactPhone &amp;&amp; !string.IsNullOrEmpty(workingText))&#xD;&#xA;{&#xD;&#xA;    var pattern = @&quot;\b(?:\+?1[-.\s]?)?\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}\b&quot;;&#xD;&#xA;    var matches = System.Text.RegularExpressions.Regex.Matches(workingText, pattern);&#xD;&#xA;    if (matches.Count &gt; 0)&#xD;&#xA;    {&#xD;&#xA;        workingText = System.Text.RegularExpressions.Regex.Replace(workingText, pattern, replacement);&#xD;&#xA;        redactionCount += matches.Count;&#xD;&#xA;        detectedTypes.Add(&quot;phone&quot;);&#xD;&#xA;    }&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;if (redactEmail &amp;&amp; !string.IsNullOrEmpty(workingText))&#xD;&#xA;{&#xD;&#xA;    var pattern = @&quot;\b[\w._%+-]+@[\w.-]+\.[A-Za-z]{2,}\b&quot;;&#xD;&#xA;    var matches = System.Text.RegularExpressions.Regex.Matches(workingText, pattern);&#xD;&#xA;    if (matches.Count &gt; 0)&#xD;&#xA;    {&#xD;&#xA;        workingText = System.Text.RegularExpressions.Regex.Replace(workingText, pattern, replacement);&#xD;&#xA;        redactionCount += matches.Count;&#xD;&#xA;        detectedTypes.Add(&quot;email&quot;);&#xD;&#xA;    }&#xD;&#xA;}" DisplayName="Redact PII via regex" sap:VirtualizedContainerService.HintSize="450,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Language="CSharp">
+      <ui:InvokeCode.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="inputText">
+          <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_4">in_InputText</CSharpValue>
+        </InArgument>
+        <InArgument x:TypeArguments="x:Boolean" x:Key="redactSSN">
+          <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_5">in_RedactSSN</CSharpValue>
+        </InArgument>
+        <InArgument x:TypeArguments="x:Boolean" x:Key="redactAccount">
+          <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_6">in_RedactAccountNumbers</CSharpValue>
+        </InArgument>
+        <InArgument x:TypeArguments="x:Boolean" x:Key="redactPhone">
+          <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_7">in_RedactPhones</CSharpValue>
+        </InArgument>
+        <InArgument x:TypeArguments="x:Boolean" x:Key="redactEmail">
+          <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_8">in_RedactEmails</CSharpValue>
+        </InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="replacement">
+          <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_9">in_Replacement</CSharpValue>
+        </InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="workingText">
+          <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_1">workingText</CSharpReference>
+        </OutArgument>
+        <OutArgument x:TypeArguments="x:Int32" x:Key="redactionCount">
+          <CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_2">redactionCount</CSharpReference>
+        </OutArgument>
+        <InArgument x:TypeArguments="scg:List(x:String)" x:Key="detectedTypes">
+          <CSharpValue x:TypeArguments="scg:List(x:String)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_10">detectedTypes</CSharpValue>
+        </InArgument>
+      </ui:InvokeCode.Arguments>
+    </ui:InvokeCode>
+    <Assign DisplayName="Set out_RedactedText" sap:VirtualizedContainerService.HintSize="450,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">
+          <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_3">out_RedactedText</CSharpReference>
+        </OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">
+          <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_11">workingText</CSharpValue>
+        </InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Set out_RedactionCount" sap:VirtualizedContainerService.HintSize="450,176.66666666666666" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Int32">
+          <CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_4">out_RedactionCount</CSharpReference>
+        </OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Int32">
+          <CSharpValue x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpValue`1_12">redactionCount</CSharpValue>
+        </InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Set out_DetectedTypes" sap:VirtualizedContainerService.HintSize="450,167.33333333333334" sap2010:WorkflowViewState.IdRef="Assign_3">
+      <Assign.To>
+        <OutArgument x:TypeArguments="s:String[]">
+          <CSharpReference x:TypeArguments="s:String[]" sap2010:WorkflowViewState.IdRef="CSharpReference`1_5">out_DetectedTypes</CSharpReference>
+        </OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="s:String[]">
+          <CSharpValue x:TypeArguments="s:String[]" sap2010:WorkflowViewState.IdRef="CSharpValue`1_13">detectedTypes.ToArray()</CSharpValue>
+        </InArgument>
+      </Assign.Value>
+    </Assign>
+  </Sequence>
+</Activity>
