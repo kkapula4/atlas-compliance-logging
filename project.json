@@ -4,13 +4,13 @@
   "description": "Reusable UiPath workflows for federal-grade audit logging, PII redaction, tamper-evident hashing, retention stamping, and ATO evidence packaging. Aligned with NIST 800-53 Rev.",
   "main": "NewActivity.xaml",
   "dependencies": {
-    "UiPath.System.Activities": "26.2.4"
+    "UiPath.System.Activities": "26.4.1-preview"
   },
   "webServices": [],
   "entitiesStores": [],
   "schemaVersion": "4.0",
   "studioVersion": "26.0.192.0",
-  "projectVersion": "1.0.0",
+  "projectVersion": "0.1.0",
   "runtimeOptions": {
     "autoDispose": false,
     "netFrameworkLazyLoading": false,
