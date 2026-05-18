@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Log_NIST_AuditEvent" this:Log_NIST_AuditEvent.in_RedactPII="True" this:Log_NIST_AuditEvent.in_OutputTarget="file" this:Log_NIST_AuditEvent.in_SchemaVersion="atlas.compliance.logging.v1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Log_NIST_AuditEvent" this:Log_NIST_AuditEvent.in_RedactPII="True" this:Log_NIST_AuditEvent.in_OutputTarget="file" this:Log_NIST_AuditEvent.in_SchemaVersion="atlas.compliance.logging.v1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_EventType" Type="InArgument(x:String)" />
     <x:Property Name="in_ControlIds" Type="InArgument(s:String[])" />
@@ -108,8 +108,11 @@
       <AssemblyReference>System.IO.FileSystem.DriveInfo</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Log_NIST_AuditEvent" sap:VirtualizedContainerService.HintSize="673.3333333333333,3317.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Log_NIST_AuditEvent" sap:VirtualizedContainerService.HintSize="704,3849.3333333333335" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
+      <Variable x:TypeArguments="x:Int32" Name="redactionCount" />
+      <Variable x:TypeArguments="x:String" Name="redactedPayloadJson" />
+      <Variable x:TypeArguments="x:String" Name="payloadJson" />
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="auditRecord">
         <Variable.Default>
           <CSharpValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_1">new Dictionary&lt;string, object&gt;()</CSharpValue>
@@ -184,19 +187,58 @@
         </InArgument>
       </Assign.Value>
     </Assign>
-    <If DisplayName="[5] If in_RedactPII → redact PII (TODO Day 7)" sap:VirtualizedContainerService.HintSize="452,321.3333333333333" sap2010:WorkflowViewState.IdRef="If_1">
+    <If DisplayName="[5] If in_RedactPII → redact PII (TODO Day 7)" sap:VirtualizedContainerService.HintSize="452,853.3333333333334" sap2010:WorkflowViewState.IdRef="If_1">
       <If.Condition>
         <InArgument x:TypeArguments="x:Boolean">
           <CSharpValue x:TypeArguments="x:Boolean" sap2010:WorkflowViewState.IdRef="CSharpValue`1_12">in_RedactPII</CSharpValue>
         </InArgument>
       </If.Condition>
       <If.Then>
-        <Sequence DisplayName="TODO Day 7 — PII Redaction placeholder" sap:VirtualizedContainerService.HintSize="450,90.66666666666667" sap2010:WorkflowViewState.IdRef="Sequence_2">
+        <Sequence DisplayName="TODO Day 7 — PII Redaction placeholder" sap:VirtualizedContainerService.HintSize="450,622.6666666666666" sap2010:WorkflowViewState.IdRef="Sequence_2">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
+          <ui:InvokeCode ContinueOnError="{x:Null}" Code="payloadJson = Newtonsoft.Json.JsonConvert.SerializeObject(processedPayload);" DisplayName="Serialize payload for redaction" sap:VirtualizedContainerService.HintSize="416,197.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeCode_1" Language="CSharp">
+            <ui:InvokeCode.Arguments>
+              <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="processedPayload">
+                <CSharpValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" sap2010:WorkflowViewState.IdRef="CSharpValue`1_29">processedPayload</CSharpValue>
+              </InArgument>
+              <InOutArgument x:TypeArguments="x:String" x:Key="payloadJson">
+                <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_16">payloadJson</CSharpReference>
+              </InOutArgument>
+            </ui:InvokeCode.Arguments>
+          </ui:InvokeCode>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" DisplayName="Redact_PII_Text - Invoke Workflow File (Activities\Redact_PII_Text.xaml)" sap:VirtualizedContainerService.HintSize="416,177.33333333333334" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Activities\Redact_PII_Text.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="in_InputText">
+                <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_30">payloadJson</CSharpValue>
+              </InArgument>
+              <InArgument x:TypeArguments="x:Boolean" x:Key="in_RedactEmails" />
+              <InArgument x:TypeArguments="x:Boolean" x:Key="in_RedactPhones" />
+              <InArgument x:TypeArguments="x:Boolean" x:Key="in_RedactSSN" />
+              <InArgument x:TypeArguments="x:Boolean" x:Key="in_RedactAccountNumbers" />
+              <InArgument x:TypeArguments="x:String" x:Key="in_Replacement" />
+              <OutArgument x:TypeArguments="x:String" x:Key="out_RedactedText">
+                <CSharpReference x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpReference`1_17">redactedPayloadJson</CSharpReference>
+              </OutArgument>
+              <OutArgument x:TypeArguments="x:Int32" x:Key="out_RedactionCount">
+                <CSharpReference x:TypeArguments="x:Int32" sap2010:WorkflowViewState.IdRef="CSharpReference`1_18">redactionCount</CSharpReference>
+              </OutArgument>
+              <OutArgument x:TypeArguments="s:String[]" x:Key="out_DetectedTypes" />
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <ui:InvokeCode ContinueOnError="{x:Null}" Code="processedPayload = Newtonsoft.Json.JsonConvert.DeserializeObject&lt;Dictionary&lt;string, object&gt;&gt;(redactedPayloadJson);" DisplayName="Deserialize redacted payload" sap:VirtualizedContainerService.HintSize="416,188" sap2010:WorkflowViewState.IdRef="InvokeCode_2" Language="CSharp">
+            <ui:InvokeCode.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="redactedPayloadJson">
+                <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_31">redactedPayloadJson</CSharpValue>
+              </InArgument>
+              <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="processedPayload">
+                <CSharpReference x:TypeArguments="scg:Dictionary(x:String, x:Object)" sap2010:WorkflowViewState.IdRef="CSharpReference`1_19">processedPayload</CSharpReference>
+              </InOutArgument>
+            </ui:InvokeCode.Arguments>
+          </ui:InvokeCode>
         </Sequence>
       </If.Then>
     </If>
